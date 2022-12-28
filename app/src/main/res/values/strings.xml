@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BrocCoInvite</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="invite_fragment_label">Invite Fragment</string>
+    <string name="added_fragment_label">Added Fragment</string>
+</resources>

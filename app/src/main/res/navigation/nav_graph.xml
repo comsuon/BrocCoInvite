@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/InviteFragment">
+
+    <fragment
+        android:id="@+id/InviteFragment"
+        android:name="com.ericpham.broccoinvite.presentation.InviteFragment"
+        android:label="@string/invite_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_InviteFragment_to_AddedFragment"
+            app:destination="@id/AddedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/AddedFragment"
+        android:name="com.ericpham.broccoinvite.presentation.UserAddedFragment"
+        android:label="@string/added_fragment_label"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_AddedFragment_to_InviteFragment"
+            app:destination="@id/InviteFragment" />
+    </fragment>
+</navigation>
