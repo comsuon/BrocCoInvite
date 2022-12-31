@@ -1,4 +1,4 @@
-package com.ericpham.broccoinvite.presentation
+package com.ericpham.broccoinvite.presentation.invite
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

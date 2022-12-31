@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/InviteFragment"
-        android:name="com.ericpham.broccoinvite.presentation.InviteFragment"
+        android:name="com.ericpham.broccoinvite.presentation.invite.InviteFragment"
         android:label="@string/invite_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/AddedFragment"
-        android:name="com.ericpham.broccoinvite.presentation.UserAddedFragment"
+        android:name="com.ericpham.broccoinvite.presentation.useradded.UserAddedFragment"
         android:label="@string/added_fragment_label"
         tools:layout="@layout/fragment_second">
 
