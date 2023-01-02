@@ -2,14 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/InviteFragment">
+    android:id="@+id/nav_graph">
 
     <fragment
         android:id="@+id/InviteFragment"
         android:name="com.ericpham.broccoinvite.presentation.invite.InviteFragment"
-        android:label="@string/invite_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_invite_users">
 
         <action
             android:id="@+id/action_InviteFragment_to_AddedFragment"
@@ -18,11 +16,13 @@
     <fragment
         android:id="@+id/AddedFragment"
         android:name="com.ericpham.broccoinvite.presentation.useradded.UserAddedFragment"
-        android:label="@string/added_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_user_added">
 
         <action
             android:id="@+id/action_AddedFragment_to_InviteFragment"
             app:destination="@id/InviteFragment" />
+        <argument android:name="userBundle"
+            app:argType="com.ericpham.broccoinvite.data.po.User"
+            app:nullable="true" />
     </fragment>
 </navigation>

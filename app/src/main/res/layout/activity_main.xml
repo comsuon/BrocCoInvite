@@ -18,7 +18,9 @@
             android:layout_height="?attr/actionBarSize"
             app:titleCentered="true"
             app:title="@string/app_name"
-            android:background="@color/cardview_light_background"
+            app:titleTextColor="@color/white"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Title"
+            android:background="@color/primary"
             />
 
     </com.google.android.material.appbar.AppBarLayout>

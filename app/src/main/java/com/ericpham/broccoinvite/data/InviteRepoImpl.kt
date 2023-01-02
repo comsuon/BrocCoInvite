@@ -1,14 +1,21 @@
 package com.ericpham.broccoinvite.data
 
 import com.ericpham.broccoinvite.data.local.LocalDataSource
+import com.ericpham.broccoinvite.data.po.User
 import com.ericpham.broccoinvite.data.remote.RemoteDataSource
 import javax.inject.Inject
 
-class InviteRepoImpl @Inject constructor(local: LocalDataSource, remote: RemoteDataSource): InviteRepo {
-    override fun addUser() {
+class InviteRepoImpl @Inject constructor(private val local: LocalDataSource, private val remote: RemoteDataSource): InviteRepo {
 
+    override fun addUser(user: User) {
+        local.storeInvitedUser(user)
     }
 
     override fun removeUser() {
+        local.removeRequest()
+    }
+
+    override fun getUser(): User? {
+        return local.getInvitedUser()
     }
 }

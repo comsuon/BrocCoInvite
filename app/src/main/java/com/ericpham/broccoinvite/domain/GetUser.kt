@@ -6,9 +6,8 @@ import com.ericpham.broccoinvite.presentation.di.SharedPreferenceQualifier
 import javax.inject.Inject
 
 @SharedPreferenceQualifier
-class InviteUserToList @Inject constructor(private val repo: InviteRepo) {
-    suspend fun inviteUserToList(user: User): InviteResult {
-        repo.addUser(user)
-        return InviteResult.Success(user)
+class GetUser @Inject constructor(private val repo: InviteRepo) {
+    fun getUser(): User? {
+        return repo.getUser()
     }
 }

@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="primary">#189625</color>
+    <color name="widget_primary">#d1ead3</color>
+    <color name="primary_darker">#0a4110</color>
+    <color name="error_text_color">#C92d15</color>
 </resources>

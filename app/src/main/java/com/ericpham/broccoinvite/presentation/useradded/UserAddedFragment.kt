@@ -1,45 +1,53 @@
 package com.ericpham.broccoinvite.presentation.useradded
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ericpham.broccoinvite.R
-import com.ericpham.broccoinvite.databinding.FragmentSecondBinding
+import com.ericpham.broccoinvite.databinding.FragmentUserAddedBinding
+import com.ericpham.broccoinvite.presentation.BaseFragment
+import com.ericpham.broccoinvite.presentation.setDebounceClick
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
- * A simple [Fragment] subclass as the second destination in the navigation.
+ * A Fragment to show users that they are already added in to the request list,
+ * and provide option to Cancel the requests
  */
-class UserAddedFragment : Fragment() {
+@AndroidEntryPoint
+class UserAddedFragment : BaseFragment<FragmentUserAddedBinding>() {
+    override fun provideViewBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): FragmentUserAddedBinding = FragmentUserAddedBinding.inflate(inflater, container, false)
 
-    private var _binding: FragmentSecondBinding? = null
+    private val viewModel by viewModels<UserAddedViewModel>()
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun subscribeLiveData() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_AddedFragment_to_InviteFragment)
+    override fun setupViews() {
+        viewBinding?.btnReset?.setDebounceClick {
+            viewModel.removeRequest()
+            GlobalScope.launch(Dispatchers.Main) {
+                delay(1000)
+                findNavController().navigate(R.id.action_AddedFragment_to_InviteFragment)
+            }
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun initializations() {
+        val bundle = arguments ?: return
+
+        val args = UserAddedFragmentArgs.fromBundle(bundle)
+        val user = args.userBundle
+        if (user != null) {
+            viewBinding?.nameText?.text = user.name
+            viewBinding?.emailText?.text = user.email
+        }
     }
 }

@@ -1,7 +1,23 @@
 <resources>
-    <string name="app_name">BrocCoInvite</string>
+    <string name="app_name">Broc&amp;Co App</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="invite_fragment_label">Invite Fragment</string>
     <string name="added_fragment_label">Added Fragment</string>
+    <string name="name_label">Name</string>
+    <string name="email_label">Email</string>
+    <string name="confirm_email_label">Confirm Email</string>
+    <string name="invite_tips">Please provide your Information\nand hit \'Request\' button</string>
+    <string name="reset_button">Reset</string>
+    <string name="request_button">Request</string>
+    <string name="request_invite_title">Request an invitation to our upcoming app</string>
+    <string name="user_already_added_title">Your request is successful!</string>
+    <string name="user_already_added_tips">Please stay tuned for upcoming release\nor hit \'Cancel\' to cancel the request</string>
+    <string name="validate_name_error_msg">Name should be equal or more than 3 characters!</string>
+    <string name="validate_email_error_msg">Please check again your entered email address!</string>
+    <string name="validate_confirm_email_error_msg">Please re-enter your email address!</string>
+    <string name="form_invalid_toast_msg">Please check again your information!</string>
+    <string name="loading_default_text">Loading...</string>
+    <string name="btn_dialog_dismiss">Dismiss</string>
+    <string name="invite_loading_message">Sending you request, please wait...</string>
 </resources>
