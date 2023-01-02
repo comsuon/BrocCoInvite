@@ -35,7 +35,7 @@ class InviteViewModel @Inject constructor(
 
     val resultLiveData = _resultLiveData
 
-    fun signUpUserByNameAndEmail(user: User) {
+    fun requestAppAccess(user: User) {
         _resultLiveData.postValue(InviteResult.Loading)
         viewModelScope.launch(coroutineContext) {
             when (val fakeAuthResult = fakeAuthUseCase.fakeAuth(user)) {

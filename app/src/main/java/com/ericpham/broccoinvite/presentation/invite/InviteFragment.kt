@@ -1,6 +1,5 @@
 package com.ericpham.broccoinvite.presentation.invite
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -11,10 +10,7 @@ import com.ericpham.broccoinvite.data.po.User
 import com.ericpham.broccoinvite.databinding.FragmentInviteUsersBinding
 import com.ericpham.broccoinvite.domain.InviteResult
 import com.ericpham.broccoinvite.presentation.BaseFragment
-import com.ericpham.broccoinvite.presentation.MainActivity
 import com.ericpham.broccoinvite.presentation.setDebounceClick
-import com.ericpham.broccoinvite.presentation.useradded.UserAddedFragment
-import com.ericpham.broccoinvite.presentation.useradded.UserAddedFragmentDirections
 import com.ericpham.broccoinvite.presentation.widgets.formEditText.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -85,10 +81,11 @@ class InviteFragment : BaseFragment<FragmentInviteUsersBinding>() {
                     )
                 )
             )
-            val isFormValid = formCollections.all { it?.validateField() ?: true }
+            var isFormValid = true
+            formCollections.forEach { isFormValid = it?.validateField() ?: false && isFormValid }
             if (isFormValid) {
                 //Call BE to add to invite list
-                viewModel.signUpUserByNameAndEmail(User(userName, userEmail))
+                viewModel.requestAppAccess(User(userName, userEmail))
             } else {
                 Toast.makeText(
                     requireContext(),

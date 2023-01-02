@@ -7,6 +7,6 @@ suspend fun <T : Any> safeApiCall(call: suspend () -> Response<T>): ApiResponse<
         val response = call.invoke()
         ApiResponse.create(response)
     } catch (error: Throwable) {
-        ApiErrorResponse(error.message ?: "")
+        ApiErrorResponse("Some thing went wrong, please try again.")
     }
 }
