@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 @SharedPreferenceQualifier
 class InviteUserToList @Inject constructor(private val repo: InviteRepo) {
-    suspend fun inviteUserToList(user: User): InviteResult {
+    fun inviteUserToList(user: User): InviteResult {
         repo.addUser(user)
         return InviteResult.Success(user)
     }

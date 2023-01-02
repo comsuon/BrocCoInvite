@@ -45,17 +45,20 @@ class MainActivity : AppCompatActivity() {
     private fun setUpGraph(navController: NavController) {
         val user = viewModel.getUser()
         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+
         if (user != null) {
             navGraph.startDestination = R.id.AddedFragment
             navController.setGraph(
                 navGraph,
-                bundleOf(USER_BUNDLE_KEY to  user)
+                bundleOf(USER_BUNDLE_KEY to user)
             )
         } else {
             navGraph.startDestination = R.id.InviteFragment
             navController.graph = navGraph
         }
-        appBarConfiguration = AppBarConfiguration(navController.graph)
+        
+        //provide set Fragment IDs to remove back button
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.AddedFragment, R.id.InviteFragment))
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 

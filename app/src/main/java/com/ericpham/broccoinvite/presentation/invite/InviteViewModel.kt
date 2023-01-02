@@ -4,15 +4,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ericpham.broccoinvite.data.po.User
+import com.ericpham.broccoinvite.data.remote.ApiErrorResponse
+import com.ericpham.broccoinvite.data.remote.ApiSuccessResponse
 import com.ericpham.broccoinvite.domain.InviteResult
 import com.ericpham.broccoinvite.domain.InviteUserToList
+import com.ericpham.broccoinvite.domain.RemoteFakeAuthUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @HiltViewModel
 class InviteViewModel @Inject constructor(
-    private val inviteUserUseCase: InviteUserToList
+    private val inviteUserUseCase: InviteUserToList,
+    private val fakeAuthUseCase: RemoteFakeAuthUser
 ) : ViewModel() {
 
     private val _resultLiveData = MutableLiveData<InviteResult>()
@@ -34,11 +38,20 @@ class InviteViewModel @Inject constructor(
     fun signUpUserByNameAndEmail(user: User) {
         _resultLiveData.postValue(InviteResult.Loading)
         viewModelScope.launch(coroutineContext) {
-            delay(1000)
-            val result = inviteUserUseCase.inviteUserToList(user)
-            withContext(Dispatchers.Main) {
-                _resultLiveData.postValue(result)
+            when (val fakeAuthResult = fakeAuthUseCase.fakeAuth(user)) {
+                is ApiSuccessResponse -> {
+                    val storeUser = inviteUserUseCase.inviteUserToList(user)
+                    withContext(Dispatchers.Main) {
+                        _resultLiveData.postValue(storeUser)
+                    }
+                }
+                is ApiErrorResponse -> {
+                    withContext(Dispatchers.Main) {
+                        _resultLiveData.postValue(InviteResult.Error(fakeAuthResult.errorMessage))
+                    }
+                }
             }
+
         }
     }
 

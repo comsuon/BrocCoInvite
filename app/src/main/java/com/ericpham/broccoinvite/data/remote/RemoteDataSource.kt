@@ -1,7 +1,7 @@
 package com.ericpham.broccoinvite.data.remote
 
-import javax.inject.Inject
+import com.ericpham.broccoinvite.data.po.User
 
 interface RemoteDataSource {
-    suspend fun fakeAuth(name: String, email: String): Result<Int>
+    suspend fun fakeAuth(user: User): ApiResponse<String>
 }
