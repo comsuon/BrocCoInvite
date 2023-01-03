@@ -10,6 +10,7 @@ import com.ericpham.broccoinvite.data.po.User
 import com.ericpham.broccoinvite.databinding.FragmentInviteUsersBinding
 import com.ericpham.broccoinvite.domain.InviteResult
 import com.ericpham.broccoinvite.presentation.BaseFragment
+import com.ericpham.broccoinvite.presentation.dialogs.SuccessDialog
 import com.ericpham.broccoinvite.presentation.setDebounceClick
 import com.ericpham.broccoinvite.presentation.widgets.formEditText.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,8 +43,18 @@ class InviteFragment : BaseFragment<FragmentInviteUsersBinding>() {
                 }
                 is InviteResult.Success -> {
                     dismissLoadingDialog()
-                    val action = InviteFragmentDirections.actionInviteFragmentToAddedFragment(result.user)
-                    findNavController().navigate(action)
+                    val successDialog = SuccessDialog(
+                        requireContext(), getString(R.string.congrats_request_sent_msg)
+                    ) {
+                        //navigate to success fragment
+                        val action =
+                            InviteFragmentDirections.actionInviteFragmentToAddedFragment(result.user)
+                        findNavController().navigate(action)
+                    }.apply {
+                        setCancelable(false)
+                        show()
+                    }
+
                 }
                 is InviteResult.Error -> {
                     handleErrorMsg(result.errorMsg)

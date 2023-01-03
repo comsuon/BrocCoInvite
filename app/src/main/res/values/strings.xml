@@ -20,4 +20,10 @@
     <string name="loading_default_text">Loading...</string>
     <string name="btn_dialog_dismiss">Dismiss</string>
     <string name="invite_loading_message">Sending you request, please wait...</string>
+    <string name="ok_button">OK</string>
+    <string name="congrats_request_sent_msg">Congratulations! \nYour request is sent successfully</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="confirmation_dialog_title">Confirmation!</string>
+    <string name="confirm_dialog_msg">Please confirm you want to cancel the request to be the first users of our app!</string>
 </resources>
